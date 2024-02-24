@@ -69,7 +69,6 @@ function StyledDropzone({ onDrop }) {
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject, isDragActive } = useDropzone({
     accept: { 'image/*': [] },
     onDrop: acceptedFiles => {
-      debugger
       if (acceptedFiles.length > 1) {
         setError('Solo puedes subir una imagen a la vez');
         setTimeout(() => setError(''), 5000);
@@ -83,9 +82,19 @@ function StyledDropzone({ onDrop }) {
   });
 
   function handleOnDrop(acceptedFiles) {
-    debugger
-    // Your custom logic for dropped files
-    onDrop(acceptedFiles); // Assuming `onDrop` is from a parent component
+    const file = acceptedFiles[0];
+
+      // Convert file to base64
+      const reader = new FileReader();
+      reader.onload = () => {
+        debugger
+        const base64Image = reader.result; // Remove data URL prefix
+        // const base64Image = reader.result.split(",")[1]; // Remove data URL prefix
+
+        // Call onDrop with base64 data
+        onDrop(base64Image, file);
+      };
+      reader.readAsDataURL(file);
   }
 
   const thumbs = files.map(file => (

@@ -40,7 +40,6 @@ async function create(race){
 
 
 async function update(race){
-    debugger
     return fetch('http://localhost:2030/races',{
         method:'PUT',
         headers:{
@@ -55,7 +54,6 @@ async function update(race){
     })
     .then(response =>{
         console.log(response)
-        debugger
         return response.json()
     }).catch(err=>{
         console.log(err.message)

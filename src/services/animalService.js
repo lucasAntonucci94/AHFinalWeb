@@ -46,7 +46,6 @@ async function update(animal){
     })
     .then(response =>{
         console.log(response)
-        debugger
         return response.json()
     }).catch(err=>{
         console.log(err.message)

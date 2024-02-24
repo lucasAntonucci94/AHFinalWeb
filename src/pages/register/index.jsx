@@ -27,7 +27,6 @@ function Index(props){
         AuthService.register({email, password})
         .then((response) => {
             console.log(response)
-            debugger
             setMessage("Se creo la nueva contrasena con exito")
             setTimeout(function(){
                 navigate('/login', {replace:true})
@@ -35,7 +34,6 @@ function Index(props){
 
         })
         .catch(err =>{
-            debugger
             setError(err.message)
         })
     }

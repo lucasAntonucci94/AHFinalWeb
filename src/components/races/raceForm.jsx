@@ -15,7 +15,6 @@ function RaceForm({onSubmit, species, race, buttonText}){
     useEffect(function(){
         if(race != null || race != undefined )
         {
-            debugger
             setIdRace(race?._id)
             setName(race?.name)
             setIdSpecie(race?.id_specie)
@@ -35,7 +34,6 @@ function RaceForm({onSubmit, species, race, buttonText}){
         setName(ev.target.value)
     }
     function handleSpecie(ev){
-        debugger
         setIdSpecie(ev.target.value)
     }
 

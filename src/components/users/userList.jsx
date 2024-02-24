@@ -9,7 +9,6 @@ function UserList({users, toEdit, toDelete}){
 
     function handleEdit(ev, user){
         ev.preventDefault();
-        debugger
         toEdit(user)
     }
 

@@ -41,7 +41,6 @@ async function create(user){
 }
 
 async function update(user){
-    debugger
     return fetch('http://localhost:2030/api/users',{
         method:'PUT',
         headers:{

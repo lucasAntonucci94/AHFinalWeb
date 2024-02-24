@@ -45,7 +45,6 @@ function ForgetPasswordForm({onSubmit,onClick}){
     }
 
     function handleEmail(ev){
-      debugger
         setEmail(ev.target.value)
     }
     function validateEmail(email) {

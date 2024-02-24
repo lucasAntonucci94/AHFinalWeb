@@ -6,6 +6,7 @@ function ProfileForm({props,onSubmit,onClick, user, buttonText}){
     const [email, setEmail] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [image, setImage] = useState(null);
     const [file, setFile] = useState(null);
 
   useEffect(function(){
@@ -20,22 +21,13 @@ function ProfileForm({props,onSubmit,onClick, user, buttonText}){
     
     async function handleSubmit(ev){
         ev.preventDefault()
-
-
-        var awda=file
-        var adwdawd={
-            id: idUser,
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-        }
-        debugger
-
         onSubmit({
             id: idUser,
             email: email,
             firstName: firstName,
             lastName: lastName,
+            image: image,
+            file: file,
         })
         // if (file) {
         //     const formData = new FormData();
@@ -63,10 +55,9 @@ function ProfileForm({props,onSubmit,onClick, user, buttonText}){
     function handleClick(){
         onClick()
     }
-    function handleOnDrop(files){
-        const thisFile = files[0];
-        setFile(thisFile);
-        // Guarda el primer archivo seleccionado
+    function handleOnDrop(base64, dropFile){
+        setFile(dropFile);
+        setImage(base64);
     };
     return (
         <div>   

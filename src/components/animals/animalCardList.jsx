@@ -8,7 +8,6 @@ function AnimalCardList({animals,refreshGrid}){
 
     function handleDelete(ev, id){
         ev.preventDefault();
-        debugger
         AnimalService.deleteOne(id)
           .then(data =>{
             console.log(data)

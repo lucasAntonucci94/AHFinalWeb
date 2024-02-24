@@ -20,7 +20,6 @@ function View({}){
 
   useEffect(function(){
     species?.filter(function(element){
-        debugger
         if(element._id == race.id_specie)
             setSpecieName(element.name)
     })

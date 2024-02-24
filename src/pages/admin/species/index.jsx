@@ -38,15 +38,12 @@ function Index({}){
   }
   function upsertSpecie(specie){
     if(specie == null || specie == undefined ||specie?.name == null || specie?.name == undefined|| specie?.name == '' ){
-      debugger
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos.')
     }else{
       if(specie.id == null || specie.id == undefined){
-        debugger
         SpecieService.create(specie)
           .then((response)=>{
-            debugger
             if(response.acknowledged == true && response.insertedId != null){
               setIsValid(true)
               setMessage('La especie fue creado satisfactoriamente.')
@@ -66,7 +63,6 @@ function Index({}){
         SpecieService.update(specie)
         .then(response =>{
           console.log(response)
-          debugger
 
           if(response.success){
             setIsValid(response.success)
@@ -91,7 +87,6 @@ function Index({}){
  
   //Le pasamosa esta funcion al listado de speciees, para que al seleccionar eleminar uno, nos notifique.
   function toDelete(id){
-    debugger
     SpecieService.deleteOne(id)
     .then(data =>{
       console.log(data)

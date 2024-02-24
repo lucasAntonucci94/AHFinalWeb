@@ -8,7 +8,6 @@ function SpecieForm({onSubmit, specie, buttonText}){
     useEffect(function(){
         if(specie != null || specie != undefined )
         {
-            debugger
             setIdSpecie(specie?._id)
             setName(specie?.name)
         }

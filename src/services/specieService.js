@@ -9,7 +9,6 @@ async function find(){
     })
         .then(response => response.json())
         .then(function(data){
-          debugger
            return data
         })
 }

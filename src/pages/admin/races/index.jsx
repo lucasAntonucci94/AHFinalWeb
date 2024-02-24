@@ -64,7 +64,6 @@ function Index({}){
         RaceService.update(race)
         .then(response =>{
           console.log(response)
-          debugger
 
           if(response.success){
             setIsValid(response.success)
@@ -90,7 +89,6 @@ function Index({}){
 
   //Le pasamosa esta funcion al listado de racees, para que al seleccionar eleminar uno, nos notifique.
   function toDelete(id){
-    debugger
     RaceService.deleteOne(id)
     .then(data =>{
       console.log(data)

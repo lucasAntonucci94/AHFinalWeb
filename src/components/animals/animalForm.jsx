@@ -63,7 +63,6 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
         if(thisSpecie != null)
             setSpecie(thisSpecie[0])
 
-            debugger
         if(hasRaces != null){
             setArrayRaces(hasRaces)
             setFlagHasRace(true)

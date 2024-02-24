@@ -15,7 +15,6 @@ async function login(email, password){
 }
 
 async function register(user){
-    debugger
     return fetch('http://localhost:2030/api/register',{
         method: 'POST',
         headers:{
@@ -30,7 +29,6 @@ async function register(user){
       })
     })
     .then(response => {
-      debugger
       if(response.status === 200){
         return response.json()
       }  
@@ -43,7 +41,6 @@ async function resetPassword(email, password){
       email:email ?? '',
       password:password ?? '',
     }
-    debugger
     // if(email != null && !string.empty(email))
     return fetch('http://localhost:2030/api/reset-password',{
         method: 'PUT',
@@ -53,7 +50,6 @@ async function resetPassword(email, password){
         body: JSON.stringify(body)
     })
     .then(response => {
-      debugger
       if(response.status === 200){
         return response.json()
       }  

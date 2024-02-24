@@ -33,7 +33,6 @@ function Index({}){
     setOnChange(true)
     AnimalService.find()
     .then(data =>{
-      debugger
       setAnimals(data)
     })
     SpecieService.find()
@@ -54,15 +53,12 @@ function Index({}){
   
   function upsertAnimal(animal){
     if(animal == null || animal == undefined ||animal.name == null || animal.name == undefined ||animal.age == null || animal.age == undefined ||animal.description == null || animal.description == undefined ||animal.race == null || animal.race == undefined ||animal.specie == null || animal.specie == undefined || animal.name == '' || animal.age == '' || animal.race == '' || animal.specie == '' || animal.description == ''){
-      debugger
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos.')
     }else{
       if(animal.id == null || animal.id == undefined){
-        debugger
         AnimalService.create(animal)
           .then((response)=>{
-            debugger
             if(response.acknowledged == true && response.insertedId != null){
               setIsValid(true)
               setMessage('Animal creado satisfactoriamente.')
@@ -82,7 +78,6 @@ function Index({}){
         AnimalService.update(animal)
         .then(response =>{
           console.log(response)
-          debugger
 
           if(response.matchedCount > 0){
             setIsValid(true)
@@ -94,8 +89,6 @@ function Index({}){
           }
         })
         .then(data =>{
-            debugger
-
             setAnimals(data)
             setOnChange(!onChange)
           })
@@ -112,7 +105,6 @@ function Index({}){
  
   //Le pasamosa esta funcion al listado de animales, para que al seleccionar eleminar uno, nos notifique.
   function toDelete(id){
-    debugger
     AnimalService.deleteOne(id)
     .then(data =>{
       console.log(data)

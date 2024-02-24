@@ -11,13 +11,10 @@ import ResetPasswordForm from '../../components/auth/resetPasswordForm'
 function Index(props){
     let navigate = useNavigate()
     const { email } = useParams()
-    // debugger
-    // const [password, setPassword] = useState("")
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
 
     function handleSubmit(newPassword){
-        debugger
      
         AuthService.resetPassword(email, newPassword)
         .then(({response}) => {

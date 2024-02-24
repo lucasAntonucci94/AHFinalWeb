@@ -16,7 +16,6 @@ function View({}){
   useEffect(function(){
     userService.findById(id)
     .then(data =>{
-debugger
         setUser(data)
     } 
     )

@@ -13,6 +13,7 @@ function Index({}){
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
+    debugger
     if(user != null || user != undefined){
       setAuthUser(user)
       console.log(user)
@@ -25,7 +26,6 @@ function Index({}){
     setOnChange(!onChange)
   }
   async function updateProfile(data){
-
     if(data == null || data == undefined ||data.email == null || data.email == undefined){
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos')
@@ -33,7 +33,6 @@ function Index({}){
       await UserService.updateProfile(data)
       .then((response)=>{
         console.log(response)
-        debugger
         if(response.matchedCount > 0){
           setIsValid(true)
           setMessage('Usuario actualizado satisfactoriamente.')
@@ -86,9 +85,10 @@ function Index({}){
                   </div>
                   <div className="col-5">
                       <img 
-                      src="images/profile/totoro.jpg"
+                      src={authUser.image}
+                      // src="images/profile/totoro.jpg"
                       alt="image_profile"
-                      style={{width:'100%'}}
+                      style={{width:'50%'}}
                       />
                   </div>
               </div>
