@@ -10,6 +10,7 @@ function AnimalCardList({animals}){
     //             refreshGrid()
     //       })
     // }
+    
     return (
         <div className="container-fluid p-5">
             <div className="row">

@@ -3,7 +3,6 @@ import AnimalListItem from './animalListItem'
 import { Table } from 'react-bootstrap';
 import { Link } from "react-router-dom"
 import * as AnimalService from '../../services/animalService'
-import { toHaveDescription } from "@testing-library/jest-dom/dist/matchers";
 
 function AnimalList({animals,toDelete, toEdit}){
     function handleEdit(ev, animal){

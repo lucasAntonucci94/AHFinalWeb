@@ -5,8 +5,7 @@ export function UseAuth() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const isAuthed = !!token;
+    const isAuthed = hasAuthentication()
     setIsAuthenticated(isAuthed);
     setIsCheckingAuth(false);
   }, []);
