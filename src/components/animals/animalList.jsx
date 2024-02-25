@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react"
-import AnimalListItem from './animalListItem'
 import { Table } from 'react-bootstrap';
 import { Link } from "react-router-dom"
-import * as AnimalService from '../../services/animalService'
 
 function AnimalList({animals,toDelete, toEdit}){
     function handleEdit(ev, animal){
@@ -44,10 +41,6 @@ function AnimalList({animals,toDelete, toEdit}){
                     )}
                 </tbody>
             </Table>
-            
-            <ul>
-               
-            </ul>
         </div>
     )
 }
