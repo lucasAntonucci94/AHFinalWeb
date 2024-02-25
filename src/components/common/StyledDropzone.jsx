@@ -104,6 +104,7 @@ function StyledDropzone({ onDrop, preview }) {
       <div style={thumbInner}>
         <img
           src={file.preview}
+          alt={file.preview}
           style={img}
           onLoad={() => URL.revokeObjectURL(file.preview)}
         />
@@ -117,6 +118,7 @@ function StyledDropzone({ onDrop, preview }) {
         <div style={thumbInner}>
           <img
             src={previewImage}
+            alt={previewImage}
             style={img}
             onLoad={() => URL.revokeObjectURL(previewImage)}
           />

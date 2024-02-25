@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import StyledDropzone from '../common/StyledDropzone'
-import { faMillSign } from "@fortawesome/free-solid-svg-icons"
 
 function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [idAnimal, setIdAnimal] = useState(null)
@@ -16,13 +15,13 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [preview, setPreview] = useState(null);
 
     useEffect(function(){
-        debugger
         setArraySpecies(species ?? [])
         setArrayRaces(races ?? [])
     }, [species,races])
         
     useEffect(function(){
-        if(animal != null || animal != undefined )
+        debugger
+        if(animal !== null && animal !== undefined && animal._id !== null && animal._id !== undefined )
         {
             setIdAnimal(animal?._id)
             setName(animal?.name)
@@ -32,14 +31,14 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             setRace(animal?.race)
             setImage(animal?.image)
             setPreview(animal?.image)
-            if(animal?.specie != null){
+            debugger
+            if(animal?.specie !== null){
                 // filtro razas por especie para mostrar solo las necesarias
                 const racesBySpecie = races?.filter(function(element){
-                    if(element?.id_specie == animal?.specie._id)
+                    if(element?.id_specie === animal?.specie._id)
                         return element
                 })
                 setArrayRaces(racesBySpecie)
-                debugger
                 if(racesBySpecie.length > 0){
                     setFlagHasRace(true)
                 }
@@ -71,15 +70,15 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     }
     function handleSpecie(ev){
         const thisSpecie = species?.filter(function(element){
-            if(element?._id == ev.target.value)
+            if(element?._id === ev.target.value)
                 return element
         })
         // filtro razas por especie para mostrar solo las necesarias
         const hasRaces = races?.filter(function(element){
-            if(element?.id_specie == ev.target.value)
+            if(element?.id_specie === ev.target.value)
                 return element
         })
-        if(thisSpecie != null)
+        if(thisSpecie !== null)
             setSpecie(thisSpecie[0])
 
         if(hasRaces.length > 0){
@@ -92,10 +91,10 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     }
     function handleRace(ev){
         const thisRace = races?.filter(function(element){
-            if(element?._id == ev.target.value)
+            if(element?._id === ev.target.value)
                 return element
         })
-        if(thisRace != null)
+        if(thisRace !== null)
             setRace(thisRace[0])
     }
     function handleOnDrop(base64){
