@@ -10,14 +10,13 @@ function AnimalCardList({animals}){
     //             refreshGrid()
     //       })
     // }
-   
     return (
         <div className="container-fluid p-5">
             <div className="row">
                 <div className="col-12">            
                     <h3 className="d-none">LISTADO DE ANIMALES</h3>
                 </div>
-                {animals?.map((animal, i) =>  
+                {animals && animals?.map((animal, i) =>  
                 <div className="col-3  d-flex justify-content-center">
                     <Card style={{ width: '18rem', margin:'10px' }}>
                     <Card.Img variant="top"  src={animal?.image} />

@@ -25,7 +25,7 @@ import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 function App() {
-  const { isAuthenticated, isCheckingAuth, hasAuthentication } = UseAuth();
+  const { isCheckingAuth, hasAuthentication } = UseAuth();
   const [isAuth, setisAuth] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
     localStorage.setItem('token', token)
     navigate('/', {replace:true})
   }
-  
+
   function onLogout(){
     localStorage.removeItem('user')
     localStorage.removeItem('token')
