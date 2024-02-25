@@ -8,16 +8,18 @@ function ProfileForm({onSubmit,onClick, user, buttonText}){
     const [lastName, setLastName] = useState('')
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
-
+    const [isAdmin, setIsAdmin] = useState(false)
     useEffect(function(){
         if(user != null || user != undefined )
         {
+            debugger
             setIdUser(user?._id)
             setEmail(user?.email)
             setFirstName(user?.firstName)
             setLastName(user?.lastName)
             setImage(user?.image)
             setPreview(user?.image)
+            setIsAdmin(user?.isAdmin)
         }
     }, [user])
     
@@ -27,7 +29,8 @@ function ProfileForm({onSubmit,onClick, user, buttonText}){
             id: idUser,
             email: email,
             firstName: firstName,
-            lastName: lastName,
+            lastName: lastName, 
+            isAdmin: isAdmin, 
             image: image,
         })
     }
