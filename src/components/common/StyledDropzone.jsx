@@ -12,11 +12,12 @@ function StyledDropzone({ onDrop, preview }) {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
+    marginTop: "20px",
     borderWidth: 2,
     borderRadius: 2,
     borderColor: "#eeeeee",
     borderStyle: "dashed",
-    backgroundColor: "#fafafa",
+    backgroundColor: "#F4F4F4",
     color: "#bdbdbd",
     outline: "none",
     transition: "border .24s ease-in-out",
@@ -136,8 +137,8 @@ function StyledDropzone({ onDrop, preview }) {
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
         {isDragActive && <p>Arrastra y suelta tu imagen aquí</p>}
-      {!isDragActive && <p>Haz clic para seleccionar una imagen</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        {!isDragActive && <p>Haz clic para seleccionar una imagen</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
       <aside style={thumbsContainer}>
         {preview && thumbPreview}

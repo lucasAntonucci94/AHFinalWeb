@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import StyledDropzone from '../common/StyledDropzone'
+import { faMillSign } from "@fortawesome/free-solid-svg-icons"
 
 function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [idAnimal, setIdAnimal] = useState(null)
@@ -15,6 +16,7 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [preview, setPreview] = useState(null);
 
     useEffect(function(){
+        debugger
         setArraySpecies(species ?? [])
         setArrayRaces(races ?? [])
     }, [species,races])
@@ -30,6 +32,18 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             setRace(animal?.race)
             setImage(animal?.image)
             setPreview(animal?.image)
+            if(animal?.specie != null){
+                // filtro razas por especie para mostrar solo las necesarias
+                const racesBySpecie = races?.filter(function(element){
+                    if(element?.id_specie == animal?.specie._id)
+                        return element
+                })
+                setArrayRaces(racesBySpecie)
+                debugger
+                if(racesBySpecie.length > 0){
+                    setFlagHasRace(true)
+                }
+            } 
         }
     }, [animal])
     
@@ -56,7 +70,6 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
         setDescription(ev.target.value)
     }
     function handleSpecie(ev){
-        
         const thisSpecie = species?.filter(function(element){
             if(element?._id == ev.target.value)
                 return element
@@ -69,9 +82,12 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
         if(thisSpecie != null)
             setSpecie(thisSpecie[0])
 
-        if(hasRaces != null){
+        if(hasRaces.length > 0){
             setArrayRaces(hasRaces)
             setFlagHasRace(true)
+        }else{
+            setArrayRaces([])
+            setFlagHasRace(false)
         }
     }
     function handleRace(ev){
@@ -88,50 +104,49 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     return (
         <div>   
             <form className="form" onSubmit={handleSubmit}>
-            <div className="form-group">  
-                <label className="form-label" htmlFor="">Nombre</label>
-                <input className="form-control" type="text" name="name" onChange={handleName} value={name} />
-                {/* <p className="text-small text-danger">Verifique este campo</p> */}
-            </div>
-            <div className="form-group">  
-                <label className="form-label" htmlFor="description">Descripción</label>
-                <input className="form-control" type="text" name="description" onChange={handleDescription} value={description}/>
-                {/* <p className="text-small text-danger">Verifique este campo</p> */}
-            </div>
-            <div className="form-group">  
-                <label className="form-label" htmlFor="age">Edad</label>
-                <input className="form-control" type="text" name="age" onChange={handleAge} value={age}/>
-                {/* <p className="text-small text-danger">Verifique este campo</p> */}
-            </div>
-            <div className="form-group">  
-                <label className="form-label" htmlFor="specie">Especie</label>
-                <select className="form-control" name="specie" value={specie?._id} onChange={handleSpecie}>
-                    <option value="0">Seleccione una especie</option>
-                    {arraySpecies.map((element,i) => (
-                        <option key={i} value={element?._id}>{element.name}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="form-group">  
-                <label className="form-label" htmlFor="race">Raza</label>
-                <select
-                     className="form-control"
-                     name="race"
-                     value={race?._id}
-                     onChange={handleRace}
-                     disabled={!flagHasRace}
-                    >
-                    <option value="0">Seleccione una raza</option>
-                    {arrayRaces.map((element,i) => (
-                        <option key={i} value={element?._id}>{element?.name}</option>
-                    ))}
-                </select>
-            </div>
-            <StyledDropzone onDrop={handleOnDrop} preview={preview} />
-            <div>
-
-            <button className="btn btn-primary w-100 my-3" type="submit">{buttonText}</button>
-            </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="">Nombre</label>
+                    <input className="form-control" type="text" name="name" onChange={handleName} value={name} />
+                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
+                </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="description">Descripción</label>
+                    <input className="form-control" type="text" name="description" onChange={handleDescription} value={description}/>
+                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
+                </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="age">Edad</label>
+                    <input className="form-control" type="text" name="age" onChange={handleAge} value={age}/>
+                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
+                </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="specie">Especie</label>
+                    <select className="form-control" name="specie" value={specie?._id} onChange={handleSpecie}>
+                        <option value="0">Seleccione una especie</option>
+                        {arraySpecies.map((element,i) => (
+                            <option key={i} value={element?._id}>{element.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="race">Raza</label>
+                    <select
+                        className="form-control"
+                        name="race"
+                        value={race?._id}
+                        onChange={handleRace}
+                        disabled={!flagHasRace}
+                        >
+                        <option value="0">Seleccione una raza</option>
+                        {arrayRaces.map((element,i) => (
+                            <option key={i} value={element?._id}>{element?.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <StyledDropzone onDrop={handleOnDrop} preview={preview} />
+                <div>
+                    <button className="btn btn-primary w-100 my-3" type="submit">{buttonText}</button>
+                </div>
             </form>
         </div>
     )
