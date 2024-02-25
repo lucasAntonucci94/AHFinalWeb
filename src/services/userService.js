@@ -53,7 +53,6 @@ async function update(user){
 }
 
 async function updateProfile(data){
-    debugger
     return fetch('http://localhost:2030/api/profile',{
         method:'PUT',
         headers:{

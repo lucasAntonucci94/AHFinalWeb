@@ -12,7 +12,6 @@ function Index({}){
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
-    debugger
     if(user != null || user != undefined){
       setAuthUser(user)
     }

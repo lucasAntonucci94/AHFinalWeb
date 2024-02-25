@@ -17,7 +17,6 @@ function Index(props){
     function handleLogin(email,password){
         AuthService.login(email, password)
         .then(({user,token}) => {
-            debugger
             props.onLogin(user, token)
         })
         .catch(err => setError(err.message))

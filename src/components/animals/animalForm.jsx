@@ -35,7 +35,6 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     
     function handleSubmit(ev){
         ev.preventDefault()
-        debugger
         onSubmit({
             id: idAnimal,
             name: name,
