@@ -26,11 +26,12 @@ function AnimalCardList({animals,refreshGrid}){
                     <div className="col-3  d-flex justify-content-center">
 
                 <Card style={{ width: '18rem', margin:'10px' }}>
-                { animal?.specie?.name.toLowerCase()  != 'gato' ? 
+                <Card.Img variant="top"  src={animal?.image} />
+                {/* { animal?.specie?.name.toLowerCase()  != 'gato' ? 
                     <Card.Img variant="top" src="images/perrito_crazy.jpg" />
                     :
                     <Card.Img variant="top" src="images/gato.jpg" />
-                }
+                } */}
                     <Card.Body>
                         <Card.Title className="px-2">{animal?.name ?? ''}</Card.Title>
                         <Card.Text>

@@ -70,25 +70,15 @@ function View({}){
                 </ul>
             </div>
             <div className="col-6" style={{margin:'0px',padding:'0px'}}>
-            { animal?.specie?.name.toLowerCase() != 'gato' ? 
-                <img 
-                src="../../images/marvelperros.jpg"
+            <img 
+                src={animal.image}
                 alt=""
                 className=".img-fluid"
                 style={{maxHeight:'600px'}}
                 />
-                :
-                <img 
-                src="../../images/michiloki.jpg"
-                alt=""
-                className=".img-fluid"
-                style={{maxHeight:'600px'}}
-                />
-            }
             </div>
         </div>
-    
-</main>
+    </main>
     )
 }
 

@@ -3,12 +3,9 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import * as AnimalService from '../../services/animalService'
 import { Link } from "react-router-dom"
-import { Table } from 'react-bootstrap';
 
 // animals imports
 // import AnimalList from '../../components/animals/animalList'
-
-
 function View({}){
   const { id } = useParams()
   const [animal, setAnimal]  = useState({})
@@ -21,25 +18,11 @@ function View({}){
      )
   }, [])
 
-
-function handleClick(){
-
-}
-  
-
- 
     return (
         <main className="container-fluid" style={{padding:'0px'}}>
-            
             <div className="row  d-flex justify-content-center" style={{padding:'0px',margin:'0px',height: '90vh'}}>
-            
-
                 <div className="col-12 bg-dark pb-4 d-flex justify-content-center align-items-center"   style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('../images/green-cat.jpg')",height: '250px'}}>
-                    
-                    
                     <div className="row w-100">
-
-
                     <div className="col-12 px-5">
                             <Link className="btn btn-warning text-center" to="/animals">
                             <b>
@@ -47,18 +30,10 @@ function handleClick(){
                             </b>
                             </Link>
                     </div>
-
-
                     <div className="col-12 text-center">
                         <h1 className=" text-white">{animal?.name}</h1>
                     </div>
-
-
-
                     </div>
-
-                
-
                 </div>
                <div className="col-6 d-flex justify-content-center align-items-center">
                     <ul >
@@ -80,24 +55,14 @@ function handleClick(){
                     </ul>
                 </div>
                 <div className="col-6" style={{margin:'0px',padding:'0px'}}>
-                { animal?.specie?._id != '62bccf9d6999561de1461262' ? 
                     <img 
-                    src="../../images/perrito_crazy.jpg"
+                    src={animal?.image}
                     alt=""
                     className=".img-fluid"
                     style={{width: '50%'}}
                     />
-                    :
-                    <img 
-                    src="../../images/michidrstrange.jpg"
-                    alt=""
-                    className=".img-fluid"
-                    style={{ maxHeight:'600px'}}
-                    />
-                }
                 </div>
             </div>
-        
     </main>
     )
 }

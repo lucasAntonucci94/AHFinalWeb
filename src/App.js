@@ -25,6 +25,7 @@ function App() {
   let navigate = useNavigate()
   
   useEffect(()=>{
+    debugger
     const token = localStorage.getItem('token')
     if(token == null){
       navigate('/login', {replace:true})

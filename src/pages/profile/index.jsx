@@ -9,32 +9,26 @@ function Index({}){
   const [authUser, setAuthUser] = useState({})
   const [onChange, setOnChange] = useState([])
   const [message, setMessage] = useState(null)
-  const [isValid, setIsValid] = useState(false)
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
     debugger
     if(user != null || user != undefined){
       setAuthUser(user)
-      console.log(user)
     }
     setOnChange(true)
   }, [])
   function handleClick(){
-    // setFormData({})
     setMessage(null)
     setOnChange(!onChange)
   }
   async function updateProfile(data){
     if(data == null || data == undefined ||data.email == null || data.email == undefined){
-      setIsValid(false)
       setMessage('Los Campos del formulario son requeridos')
     }else{
       await UserService.updateProfile(data)
       .then((response)=>{
-        console.log(response)
         if(response.matchedCount > 0){
-          setIsValid(true)
           setMessage('Usuario actualizado satisfactoriamente.')
           setOnChange(!onChange)
           if(response?.upsertedId != null && response?.upsertedId != ''){
@@ -43,7 +37,6 @@ function Index({}){
             localStorage.setItem('user', JSON.stringify(data))
           }
         }else{
-          setIsValid(false)
           setMessage('No fue posible actualizar el usuario seleccionado.')
         }
       })
@@ -86,7 +79,6 @@ function Index({}){
                   <div className="col-5">
                       <img 
                       src={authUser.image}
-                      // src="images/profile/totoro.jpg"
                       alt="image_profile"
                       style={{width:'50%'}}
                       />

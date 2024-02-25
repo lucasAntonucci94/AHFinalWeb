@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
-
-function StyledDropzone({ onDrop }) {
+function StyledDropzone({ onDrop, preview }) {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
-
+  const [previewImage, setPreviewImage] = useState('');
+  
   const baseStyle = {
     flex: 1,
     display: "flex",
@@ -22,17 +22,17 @@ function StyledDropzone({ onDrop }) {
     transition: "border .24s ease-in-out",
   };
 
-  const focusedStyle = {
-    borderColor: "#2196f3",
-  };
+  // const focusedStyle = {
+  //   borderColor: "#2196f3",
+  // };
 
-  const acceptStyle = {
-    borderColor: "#00e676",
-  };
+  // const acceptStyle = {
+  //   borderColor: "#00e676",
+  // };
 
-  const rejectStyle = {
-    borderColor: "#ff1744",
-  };
+  // const rejectStyle = {
+  //   borderColor: "#ff1744",
+  // };
 
   const thumbsContainer = {
     display: 'flex',
@@ -42,7 +42,7 @@ function StyledDropzone({ onDrop }) {
   };
   
   const thumb = {
-    display: 'inline-flex',
+    display: 'flex',
     borderRadius: 2,
     border: '1px solid #eaeaea',
     marginBottom: 8,
@@ -65,8 +65,15 @@ function StyledDropzone({ onDrop }) {
     height: '100%'
   };
   
+  useEffect(() => {
+    if (preview) {
+      setPreviewImage(preview);
+    } else {
+      setPreviewImage(null);
+    }
+  }, [preview]);
 
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 'image/*': [] },
     onDrop: acceptedFiles => {
       if (acceptedFiles.length > 1) {
@@ -83,16 +90,10 @@ function StyledDropzone({ onDrop }) {
 
   function handleOnDrop(acceptedFiles) {
     const file = acceptedFiles[0];
-
-      // Convert file to base64
       const reader = new FileReader();
       reader.onload = () => {
-        debugger
-        const base64Image = reader.result; // Remove data URL prefix
-        // const base64Image = reader.result.split(",")[1]; // Remove data URL prefix
-
-        // Call onDrop with base64 data
-        onDrop(base64Image, file);
+        const base64Image = reader.result;
+        onDrop(base64Image);
       };
       reader.readAsDataURL(file);
   }
@@ -109,6 +110,23 @@ function StyledDropzone({ onDrop }) {
     </div>
   ));
 
+  const thumbPreview = (
+    <div className="d-flex flex-column align-items-center">
+      <div style={thumb} key="previewImage">
+        <div style={thumbInner}>
+          <img
+            src={previewImage}
+            style={img}
+            onLoad={() => URL.revokeObjectURL(previewImage)}
+          />
+        </div>
+      </div>
+      <div>
+        <p>Foto Actual</p>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
@@ -122,6 +140,7 @@ function StyledDropzone({ onDrop }) {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
       <aside style={thumbsContainer}>
+        {preview && thumbPreview}
         {thumbs}
       </aside>
     </div>

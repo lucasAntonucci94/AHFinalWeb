@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import StyledDropzone from '../common/StyledDropzone'
 
 function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [idAnimal, setIdAnimal] = useState(null)
@@ -10,7 +11,9 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [flagHasRace, setFlagHasRace] = useState(false)
     const [arraySpecies, setArraySpecies] = useState([])
     const [arrayRaces, setArrayRaces] = useState([])
-  
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
+
     useEffect(function(){
         setArraySpecies(species ?? [])
         setArrayRaces(races ?? [])
@@ -25,11 +28,14 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             setDescription(animal?.description)
             setSpecie(animal?.specie)
             setRace(animal?.race)
+            setImage(animal?.image)
+            setPreview(animal?.image)
         }
     }, [animal])
     
     function handleSubmit(ev){
         ev.preventDefault()
+        debugger
         onSubmit({
             id: idAnimal,
             name: name,
@@ -37,6 +43,7 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             age: age,
             specie: specie,
             race: race,
+            image: image,
         })
     }
 
@@ -75,9 +82,10 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
         })
         if(thisRace != null)
             setRace(thisRace[0])
-      
     }
-   
+    function handleOnDrop(base64){
+        setImage(base64);
+    }
     return (
         <div>   
             <form className="form" onSubmit={handleSubmit}>
@@ -120,6 +128,7 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
                     ))}
                 </select>
             </div>
+            <StyledDropzone onDrop={handleOnDrop} preview={preview} />
             <div>
 
             <button className="btn btn-primary w-100 my-3" type="submit">{buttonText}</button>

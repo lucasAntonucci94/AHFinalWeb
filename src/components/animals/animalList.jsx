@@ -6,18 +6,14 @@ import * as AnimalService from '../../services/animalService'
 import { toHaveDescription } from "@testing-library/jest-dom/dist/matchers";
 
 function AnimalList({animals,toDelete, toEdit}){
-console.log(animals)
     function handleEdit(ev, animal){
         ev.preventDefault();
         toEdit(animal)
     }
-
-
     function handleDelete(ev, id){
         ev.preventDefault();
         toDelete(id)
     }
-   
     return (
         <div className="container-fluid p-5">
             <h1 className="d-none">LISTADO DE ANIMALES</h1>

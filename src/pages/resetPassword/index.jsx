@@ -1,14 +1,12 @@
 import React from "react"
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useParams } from "react-router-dom"
-import { propTypes } from "react-bootstrap/esm/Image"
 import * as AuthService from '../../services/authService'
 import Alert from 'react-bootstrap/Alert';
-import { Link } from "react-router-dom"
 import ResetPasswordForm from '../../components/auth/resetPasswordForm'
 
-function Index(props){
+function Index(){
     let navigate = useNavigate()
     const { email } = useParams()
     const [error, setError] = useState("")
@@ -18,6 +16,7 @@ function Index(props){
      
         AuthService.resetPassword(email, newPassword)
         .then(({response}) => {
+            setMessage('Se reseteo su contrasenia exitosamente.')
             setTimeout(function(){
                 navigate('/login', {replace:true})
             },2000)

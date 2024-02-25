@@ -1,12 +1,11 @@
 import React from "react"
-import { useState, useEffect } from "react"
-import { propTypes } from "react-bootstrap/esm/Image"
+import { useState,  } from "react"
 import * as AuthService from '../../services/authService'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Index(props){
+function Index(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")

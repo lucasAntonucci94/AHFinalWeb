@@ -1,6 +1,5 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { propTypes } from "react-bootstrap/esm/Image"
 import * as AuthService from '../../services/authService'
 import Alert from 'react-bootstrap/Alert';
 import ForgetPasswordForm from '../../components/auth/forgetPasswordForm'

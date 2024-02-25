@@ -1,9 +1,4 @@
 import React from "react"
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import * as AnimalService from '../../services/animalService'
-import { Link } from "react-router-dom"
-import { Table } from 'react-bootstrap';
 import { send } from 'emailjs-com';
 // animals imports
 // import AnimalList from '../../components/animals/animalList'

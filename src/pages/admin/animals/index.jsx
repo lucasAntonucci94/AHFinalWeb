@@ -21,14 +21,13 @@ function Index({}){
     description:'',
     specie:'',
     race:'',
+    image:null,
   })
   const [species, setSpecies] = useState([])
   const [races, setRaces] = useState([])
   const [message, setMessage] = useState(null)
   const [isValid, setIsValid] = useState(false)
     
-     
-  
   useEffect(function(){
     setOnChange(true)
     AnimalService.find()
