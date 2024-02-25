@@ -20,7 +20,6 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     }, [species,races])
         
     useEffect(function(){
-        debugger
         if(animal !== null && animal !== undefined && animal._id !== null && animal._id !== undefined )
         {
             setIdAnimal(animal?._id)
@@ -31,14 +30,13 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             setRace(animal?.race)
             setImage(animal?.image)
             setPreview(animal?.image)
-            debugger
             if(animal?.specie !== null){
                 // filtro razas por especie para mostrar solo las necesarias
                 const racesBySpecie = races?.filter(function(element){
                     if(element?.id_specie === animal?.specie._id)
                         return element
                 })
-                setArrayRaces(racesBySpecie)
+                setArrayRaces(racesBySpecie || [])
                 if(racesBySpecie.length > 0){
                     setFlagHasRace(true)
                 }
@@ -79,10 +77,10 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
                 return element
         })
         if(thisSpecie !== null)
-            setSpecie(thisSpecie[0])
+            setSpecie(thisSpecie[0] || {})
 
         if(hasRaces.length > 0){
-            setArrayRaces(hasRaces)
+            setArrayRaces(hasRaces || [])
             setFlagHasRace(true)
         }else{
             setArrayRaces([])
@@ -95,7 +93,7 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
                 return element
         })
         if(thisRace !== null)
-            setRace(thisRace[0])
+            setRace(thisRace[0] || {})
     }
     function handleOnDrop(base64){
         setImage(base64);

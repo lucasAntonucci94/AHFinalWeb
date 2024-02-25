@@ -19,7 +19,7 @@ import ABMSpeciesView from './pages/admin/species/view'
 import PageNotFound from './pages/pageNotFound'
 import ResetPassword from './pages/resetPassword'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
   let navigate = useNavigate()
@@ -30,6 +30,13 @@ function App() {
       navigate('/login', {replace:true})
     }
   }, [])
+
+  // useEffect(()=>{
+  //   const token = localStorage.getItem('token')
+  //   if(token == null){
+  //     navigate('/login', {replace:true})
+  //   }
+  // }, [navigate])
   
   function onLogin(user, token){
     localStorage.setItem('user', JSON.stringify(user))
