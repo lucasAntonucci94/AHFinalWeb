@@ -21,23 +21,20 @@ import ABMSpeciesView from './pages/admin/species/view'
 import PageNotFound from './pages/pageNotFound'
 import ResetPassword from './pages/resetPassword'
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 function App() {
   const { isCheckingAuth, hasAuthentication } = UseAuth();
-  const [isAuth, setisAuth] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const isAuthed = hasAuthentication();
-    setisAuth(isAuthed);
     if (!isAuthed && !(window.location.pathname.startsWith('/reset-password/'))) {
       navigate('/login')
     }
   }, []);
 
   function onLogin(user, token){
-    debugger
     localStorage.setItem('user', JSON.stringify(user))
     localStorage.setItem('token', token)
     navigate('/', {replace:true})

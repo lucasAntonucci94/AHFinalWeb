@@ -10,9 +10,8 @@ function ProfileForm({onSubmit,onClick, user, buttonText}){
     const [preview, setPreview] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false)
     useEffect(function(){
-        if(user != null || user != undefined )
+        if(user !== null || user !== undefined )
         {
-            debugger
             setIdUser(user?._id)
             setEmail(user?.email)
             setFirstName(user?.firstName)

@@ -22,7 +22,7 @@ function ForgetPasswordForm({onSubmit,onClick}){
         }
         const params = {
           user_email: email,
-          user_name: 'Maximo Cosseti',
+          user_name: email,
           subject: 'Peticion para reinicio de contraseña',
           message: 'Si queres reestablecer tu contraseña, haz click en el link de abajo. Y sigue los pasos.',
           linkRedirect: `http://localhost:3000/reset-password/${email}`,

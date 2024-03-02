@@ -1,19 +1,21 @@
-const token = localStorage.getItem('token')
+async function getToken(){
+    return localStorage.getItem('token');
+}
 async function find(){
     return fetch('http://localhost:2030/animals',{
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
-        .then(response => response.json())
-        .then(function(data){
-           return data
-        })
+    .then(response => response.json())
+    .then(function(data){
+        return data
+    })
 }
 async function findById(id){
     return fetch(`http://localhost:2030/animals/${id}`,{
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
     .then(response => response.json())
@@ -28,7 +30,7 @@ async function create(animal){
         method:'POST',
         headers:{
             'Content-Type':'application/json',
-            'auth-token':token
+            'auth-token': await getToken()
         },
         body: JSON.stringify(animal)
     })
@@ -36,11 +38,11 @@ async function create(animal){
 }
 
 async function update(animal){
-    return fetch('http://localhost:2030/animals',{
+        return fetch('http://localhost:2030/animals',{
         method:'PUT',
         headers:{
             'Content-Type':'application/json',
-            'auth-token':token
+            'auth-token': await getToken()
         },
         body: JSON.stringify(animal)
     })
@@ -57,7 +59,7 @@ async function deleteOne(id){
     return fetch(`http://localhost:2030/animals/${id}`,{
         method:'DELETE',
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
     .then(response => response.json())

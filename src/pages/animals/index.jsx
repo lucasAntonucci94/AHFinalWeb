@@ -10,10 +10,8 @@ function Index({}){
   }, [])
 
   async function findAnimals(){
-    debugger
     await AnimalService.find()
     .then(data =>{
-      debugger
       setAnimals(data)
     })
   }

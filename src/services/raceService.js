@@ -1,10 +1,10 @@
-const token = localStorage.getItem('token')
-
+async function getToken(){
+    return localStorage.getItem('token');
+}
 async function find(){
-   
     return fetch('http://localhost:2030/races',{
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
         .then(response => response.json())
@@ -16,7 +16,7 @@ async function find(){
 async function findById(id){
     return fetch(`http://localhost:2030/races/${id}`,{
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
         .then(response => response.json())
@@ -31,7 +31,7 @@ async function create(race){
         method:'POST',
         headers:{
             'Content-Type':'application/json',
-            'auth-token':token
+            'auth-token': await getToken()
         },
         body: JSON.stringify(race)
     })
@@ -44,7 +44,7 @@ async function update(race){
         method:'PUT',
         headers:{
             'Content-Type':'application/json',
-            'auth-token':token
+            'auth-token': await getToken()
         },
         body: JSON.stringify({
             _id: race.id,
@@ -66,7 +66,7 @@ async function deleteOne(id){
     return fetch(`http://localhost:2030/races/${id}`,{
         method:'DELETE',
         headers:{
-            'auth-token':token
+            'auth-token': await getToken()
         },
     })
     .then(response => response.json())
