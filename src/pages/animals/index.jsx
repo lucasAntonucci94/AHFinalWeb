@@ -9,9 +9,11 @@ function Index({}){
     findAnimals()
   }, [])
 
-  function findAnimals(){
-    AnimalService.find()
+  async function findAnimals(){
+    debugger
+    await AnimalService.find()
     .then(data =>{
+      debugger
       setAnimals(data)
     })
   }
@@ -21,7 +23,9 @@ function Index({}){
         <div className="bg-primary d-flex align-items-center justify-content-center"  style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('images/orange-cat.jpg')",height:'250px'}}>
           <h1 className="text-center text-white">LISTADO DE ANIMALES</h1>
         </div>
-        <AnimalCardList animals={animals ?? []} refreshGrid={findAnimals} />             
+        {animals.length > 0 && 
+          <AnimalCardList animals={animals ?? []} refreshGrid={findAnimals} />             
+        }
     </div>
   )
 }

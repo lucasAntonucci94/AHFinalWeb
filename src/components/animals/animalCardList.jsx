@@ -18,7 +18,7 @@ function AnimalCardList({animals = []}){
                 <div className="col-12">            
                     <h3 className="d-none">LISTADO DE ANIMALES</h3>
                 </div>
-                {animals && animals?.map((animal, i) =>  
+                {animals.length > 0 && animals?.map((animal, i) =>  
                 <div className="col-3  d-flex justify-content-center">
                     <Card style={{ width: '18rem', margin:'10px' }}>
                     <Card.Img variant="top"  src={animal?.image} />

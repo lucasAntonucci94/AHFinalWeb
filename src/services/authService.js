@@ -8,6 +8,7 @@ async function login(email, password){
     })
     .then(response => {
       if(response.status === 200){
+        debugger
         return response.json()
       }  
       throw new Error('Error de autenticación')
@@ -53,7 +54,7 @@ async function resetPassword(email, password){
       if(response.status === 200){
         return response.json()
       }  
-      throw new Error('Error al modificar su contrasenia')
+      throw new Error('Error al modificar su contraseña')
     })
 }
 

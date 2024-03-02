@@ -16,7 +16,7 @@ function Index(){
      
         AuthService.resetPassword(email, newPassword)
         .then(({response}) => {
-            setMessage('Se reseteo su contrasenia exitosamente.')
+            setMessage('Se reseteo su contraseña exitosamente.')
             setTimeout(function(){
                 navigate('/login', {replace:true})
             },2000)
@@ -33,7 +33,7 @@ function Index(){
                 <div className="container p-5">
                     <div className="row  d-flex justify-content-center ">
                         <div className="col-10">
-                            <h1 className="text-center py-4">Ingrese una nueva contrasenia</h1>
+                            <h1 className="text-center py-4">Ingrese una nueva contraseña</h1>
                         </div>
                         <div className="col-12">
                             <ResetPasswordForm onSubmit={handleSubmit} />

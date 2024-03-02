@@ -24,7 +24,7 @@ function AnimalList({animals,toDelete, toEdit}){
                     </tr>
                 </thead>
                 <tbody>
-                    {animals && animals?.map((animal, i) =>  
+                    {animals.length > 0 && animals?.map((animal, i) =>  
                         <tr key={i}>
                             <td>{i}</td>
                             <td>{animal?.name ?? ''}</td>

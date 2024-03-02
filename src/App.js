@@ -37,6 +37,7 @@ function App() {
   }, []);
 
   function onLogin(user, token){
+    debugger
     localStorage.setItem('user', JSON.stringify(user))
     localStorage.setItem('token', token)
     navigate('/', {replace:true})
