@@ -51,14 +51,14 @@ function Index({}){
   }
   
   function upsertAnimal(animal){
-    if(animal == null || animal == undefined ||animal.name == null || animal.name == undefined ||animal.age == null || animal.age == undefined ||animal.description == null || animal.description == undefined ||animal.race == null || animal.race == undefined ||animal.specie == null || animal.specie == undefined || animal.name == '' || animal.age == '' || animal.race == '' || animal.specie == '' || animal.description == ''){
+    if(animal === null || animal === undefined ||animal.name === null || animal.name === undefined ||animal.age === null || animal.age === undefined ||animal.description === null || animal.description === undefined ||animal.race === null || animal.race === undefined ||animal.specie === null || animal.specie === undefined || animal.name === '' || animal.age === '' || animal.race === '' || animal.specie === '' || animal.description === ''){
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos.')
     }else{
-      if(animal.id == null || animal.id == undefined){
+      if(animal.id === null || animal.id === undefined){
         AnimalService.create(animal)
           .then((response)=>{
-            if(response.acknowledged == true && response.insertedId != null){
+            if(response.acknowledged === true && response.insertedId !== null){
               setIsValid(true)
               setMessage('Animal creado satisfactoriamente.')
               return AnimalService.find()
@@ -121,8 +121,6 @@ function Index({}){
       setAnimals(data)
     })
   }
-
- 
 
     return (
       <main className="container-fluid"  style={{padding:'0px', margin:'0px', minHeight:'90vh'}}>

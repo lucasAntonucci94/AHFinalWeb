@@ -29,7 +29,7 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     const isAuthed = hasAuthentication();
-    if (!isAuthed && !(window.location.pathname.startsWith('/reset-password/'))) {
+    if (!isAuthed && !(window.location.pathname.startsWith('/reset-password/') || window.location.pathname.startsWith('/register') || window.location.pathname === '/')) {
       navigate('/login')
     }
   }, []);

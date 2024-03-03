@@ -39,7 +39,7 @@ function Index(){
 
     return(
         <> 
-            <div className="bg-light py-5"  style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('images/michidrstrange2.jpg')",height: '90vh'}}>
+            <div className="bg-light py-5"  style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('images/michidrstrange2.jpg')",minHeight: '90vh'}}>
             {message && <Alert className="text-center" variant='success'>{message}</Alert>}
             {error && <Alert className="text-center" variant='danger'>{error}</Alert>}
                     

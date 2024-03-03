@@ -12,7 +12,7 @@ function Index({}){
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
-    if(user != null || user != undefined){
+    if(user !== null || user !== undefined){
       setAuthUser(user)
     }
     setOnChange(true)
@@ -22,7 +22,7 @@ function Index({}){
     setOnChange(!onChange)
   }
   async function updateProfile(data){
-    if(data == null || data == undefined ||data.email == null || data.email == undefined){
+    if(data === null || data === undefined ||data.email === null || data.email === undefined){
       setMessage('Los Campos del formulario son requeridos')
     }else{
       await UserService.updateProfile(data)
@@ -30,7 +30,7 @@ function Index({}){
         if(response.matchedCount > 0){
           setMessage('Usuario actualizado satisfactoriamente.')
           setOnChange(!onChange)
-          if(response?.upsertedId != null && response?.upsertedId != ''){
+          if(response?.upsertedId !== null && response?.upsertedId !== ''){
             data.id =  response?.upsertedId
             setAuthUser(data)
             localStorage.setItem('user', JSON.stringify(data))
@@ -43,7 +43,7 @@ function Index({}){
   }
     return (
         <main className="container-fluid" style={{padding:'0px'}}>
-          <div className="row  d-flex justify-content-center" style={{padding:'0px',margin:'0px',height: '90vh'}}>
+          <div className="row  d-flex justify-content-center" style={{padding:'0px',margin:'0px',minHeight: '90vh'}}>
             <div className="col-12 bg-dark pb-4 d-flex justify-content-center align-items-center"   style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('images/green-cat.jpg')",height: '250px'}}>
                 <div className="row w-100">
                   <div className="col-12 px-5">

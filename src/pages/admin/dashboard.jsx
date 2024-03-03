@@ -14,7 +14,7 @@ import { FaUsers, FaDog,FaEarlybirds, FaLinux } from 'react-icons/fa';
 function Dashboard({}){
  
     return (   
-        <div className="container p-5"  style={{height: '90vh'}}>
+        <div className="container p-5"  style={{minHeight: '90vh'}}>
             <div className="row  justify-content-around pb-4" >
                 <div className="col-5 m-4 p-5 bg-abmproducts text-center text-white rounded d-flex justify-content-center align-items-center"
                      style={{height:'350px', backgroundColor:'#ff903e'}}

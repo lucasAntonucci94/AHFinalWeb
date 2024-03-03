@@ -12,6 +12,7 @@ async function find(){
            return data
         })
 }
+
 async function findById(id){
     return fetch(`http://localhost:2030/api/users/${id}`,{
         headers:{
@@ -21,6 +22,18 @@ async function findById(id){
     .then(response => response.json())
     .then(function(data){
         
+        return data
+    })
+}
+
+async function findByEmail(email){
+    return fetch(`http://localhost:2030/api/users/email/${email}`,{
+        headers:{
+            'auth-token': await getToken()
+        },
+    })
+    .then(response => response.json())
+    .then(function(data){
         return data
     })
 }
@@ -79,6 +92,7 @@ async function deleteOne(id){
 export{
     find,
     findById,
+    findByEmail,
     create,
     update,
     updateProfile,

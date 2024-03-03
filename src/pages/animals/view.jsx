@@ -20,7 +20,7 @@ function View({}){
 
     return (
         <main className="container-fluid" style={{padding:'0px'}}>
-            <div className="row  d-flex justify-content-center" style={{padding:'0px',margin:'0px',height: '90vh'}}>
+            <div className="row  d-flex justify-content-center" style={{padding:'0px',margin:'0px',minHeight: '90vh'}}>
                 <div className="col-12 bg-dark pb-4 d-flex justify-content-center align-items-center"   style={{    backgroundPosition: 'center',backgroundSize: 'cover', overflow: 'hidden', backgroundImage:"url('../images/green-cat.jpg')",height: '250px'}}>
                     <div className="row w-100">
                     <div className="col-12 px-5">

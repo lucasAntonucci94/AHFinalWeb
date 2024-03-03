@@ -9,39 +9,40 @@ function ForgetPasswordForm({onSubmit,onClick}){
   const [email, setEmail] = useState('')
 
   useEffect(function(){
-    // setEmail(user?.email)
   }, [])
     
-    function handleSubmit(ev){
-        ev.preventDefault()
-        if (!validateEmail(email)) {
-          onSubmit({
-            success:true,
-            msg:'EL mail no es valido, ingrese el formato correcto.',
-          })
-        }
+    async function handleSubmit(ev){
+      ev.preventDefault()
+      if (!validateEmail(email)) {
+        onSubmit({
+          success:false,
+          msg:'El mail no es válido, ingrese el formato correcto.',
+        })
+      }else{
+        const user = await UserService.findByEmail(email)
         const params = {
           user_email: email,
-          user_name: email,
-          subject: 'Peticion para reinicio de contraseña',
-          message: 'Si queres reestablecer tu contraseña, haz click en el link de abajo. Y sigue los pasos.',
+          user_name: user.lastName+' '+user.firstName,
+          subject: 'Petición para reinicio de contraseña',
+          message: 'Si querés restablecer tu contraseña, haz click en el link de abajo. Y sigue los pasos.',
           linkRedirect: `http://localhost:3000/reset-password/${email}`,
         };
-        if(email != null)
-        send(serviceID, templateID, params, userID)
+        if(email !== null)
+          send(serviceID, templateID, params, userID)
             .then(() => {
               onSubmit({
                 success:true,
-                msg:'El mail fue enviado satisfactoriamente, verifique su casilla porfavor.',
+                msg:'El mail fue enviado satisfactoriamente, verifique su casilla por favor.',
               })
             })
             .catch((error) => {
               onSubmit({
                 success:true,
-                msg:'Ocurrio un error al enviar el mail, vuelva intentarlo mas tarde.',
+                msg:'Ocurrió un error al enviar el mail, vuelva intentarlo más tarde.',
                 error:error,
               })
-        });
+          });
+      }
     }
 
     function handleEmail(ev){
@@ -59,7 +60,7 @@ function ForgetPasswordForm({onSubmit,onClick}){
             <form className="form border rounded p-4" style={{width: '750px', backgroundColor: 'rgba(0, 0, 0, 0.1)'}} onSubmit={handleSubmit}>
             <div className="form-group">  
                 <label className="form-label" htmlFor="email">Email</label>
-                <input className="form-control" type="text" name="email" onChange={handleEmail} value={email} />
+                <input className="form-control" type="text" name="email" placeholder="ingrese su mail" onChange={handleEmail} value={email} />
                 {/* <p className="text-small text-danger">Verifique este campo</p> */}
             </div>
             <div>

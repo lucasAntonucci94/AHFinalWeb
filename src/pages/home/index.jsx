@@ -24,7 +24,7 @@ function View({}){
     };
 
     return (
-        <div  className="container-fluid bg-light" style={{height: '90vh',margin:'0px',padding: '0px'}}>
+        <div  className="container-fluid bg-light" style={{minHeight: '90vh',margin:'0px',padding: '0px'}}>
             <div className="row"  style={{margin:'0px',padding:'0px'}}>
                 <div className="col-12 d-flex justify-content-center align-items-center" style={{backgroundColor: '#f0f0f0'}}>
                     <h1 className="text-center d-none"> INICIO VOIR </h1>
