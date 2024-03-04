@@ -19,6 +19,7 @@ function AnimalList({animals,toDelete, toEdit}){
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Edad</th>
+                        <th>Género</th>
                         <th>Especie</th>
                         <th>Raza</th>
                     </tr>
@@ -29,6 +30,7 @@ function AnimalList({animals,toDelete, toEdit}){
                             <td>{i}</td>
                             <td>{animal?.name ?? ''}</td>
                             <td>{animal?.age ?? ''}</td>
+                            <td>{animal?.genre ?? ''}</td>
                             <td>{animal?.specie?.name ?? ''}</td>
                             <td>{animal?.race?.name ?? ''}</td>
                             {/* <td>{animal?.genre ?? ''}</td> */}

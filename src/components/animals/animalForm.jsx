@@ -8,12 +8,29 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
     const [description, setDescription] = useState('')
     const [specie, setSpecie] = useState({})
     const [race, setRace] = useState({})
+    const [genre, setGenre] = useState({})
+    const [selectedGenre, setSelectedGenre] = useState({})
     const [flagHasRace, setFlagHasRace] = useState(false)
     const [arraySpecies, setArraySpecies] = useState([])
     const [arrayRaces, setArrayRaces] = useState([])
+    const [arrayGenres, setArrayGenre] = useState({})
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
 
+    useEffect(function(){
+        setArrayGenre([
+                { id: 0, name: "Seleccione un género" },
+                { id: 1, name: "Masculino" },
+                { id: 2, name: "Femenino" },
+            ])
+    }, [])
+    useEffect(function(){
+        setArrayGenre([
+                { id: 0, name: "Seleccione un género" },
+                { id: 1, name: "Masculino" },
+                { id: 2, name: "Femenino" },
+            ])
+    }, [arrayGenres])
     useEffect(function(){
         setArraySpecies(species ?? [])
         setArrayRaces(races ?? [])
@@ -28,8 +45,23 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             setDescription(animal?.description)
             setSpecie(animal?.specie)
             setRace(animal?.race)
+            setGenre(animal?.genre)
             setImage(animal?.image)
             setPreview(animal?.image)
+            if(animal?.genre !== null){
+                var genresList = (arrayGenres === null ||arrayGenres === undefined ||arrayGenres.length < 1 || arrayGenres instanceof Object ) ?  [
+                    { id: 0, name: "Seleccione un género" },
+                    { id: 1, name: "Masculino" },
+                    { id: 2, name: "Femenino" },
+                ]
+                :
+                    arrayGenres
+                ;
+                const genre = genresList.find(genre => genre.name === animal?.genre);
+                if(genre !== null){
+                    setSelectedGenre(genre.id)
+                }
+            }
             if(animal?.specie !== null){
                 // filtro razas por especie para mostrar solo las necesarias
                 const racesBySpecie = races?.filter(function(element){
@@ -53,6 +85,7 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             age: age,
             specie: specie,
             race: race,
+            genre: genre,
             image: image,
         })
     }
@@ -95,6 +128,17 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
         if(thisRace !== null)
             setRace(thisRace[0] || {})
     }
+    function handleGenre(ev){
+        debugger
+        const géneroId = ev.target.value
+        debugger
+        const genre = arrayGenres.find(genre => genre.id === parseInt(géneroId));
+
+        if(géneroId !== null && géneroId !== 0 && genre !== null){
+            setSelectedGenre(géneroId)
+            setGenre(genre.name)
+        }
+    }
     function handleOnDrop(base64){
         setImage(base64);
     }
@@ -103,18 +147,26 @@ function AnimalForm({onSubmit, animal, species, races, buttonText}){
             <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group">  
                     <label className="form-label" htmlFor="">Nombre</label>
-                    <input className="form-control" type="text" name="name" onChange={handleName} value={name} />
+                    <input className="form-control" type="text" placeholder="ingrese un nombre" name="name" onChange={handleName} value={name} />
                     {/* <p className="text-small text-danger">Verifique este campo</p> */}
                 </div>
                 <div className="form-group">  
                     <label className="form-label" htmlFor="description">Descripción</label>
-                    <input className="form-control" type="text" name="description" onChange={handleDescription} value={description}/>
+                    <input className="form-control" type="text" placeholder="ingrese una descripcion" name="description" onChange={handleDescription} value={description}/>
                     {/* <p className="text-small text-danger">Verifique este campo</p> */}
                 </div>
                 <div className="form-group">  
                     <label className="form-label" htmlFor="age">Edad</label>
-                    <input className="form-control" type="text" name="age" onChange={handleAge} value={age}/>
+                    <input className="form-control" type="number" placeholder="ingrese un edad" name="age" onChange={handleAge} value={age}/>
                     {/* <p className="text-small text-danger">Verifique este campo</p> */}
+                </div>
+                <div className="form-group">  
+                    <label className="form-label" htmlFor="genre">Género</label>
+                    <select className="form-control" name="genre" value={selectedGenre} onChange={handleGenre}>
+                        {arrayGenres.length > 0 && arrayGenres.map((element,i) => (
+                            <option key={i} value={element?.id}>{element?.name}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">  
                     <label className="form-label" htmlFor="specie">Especie</label>

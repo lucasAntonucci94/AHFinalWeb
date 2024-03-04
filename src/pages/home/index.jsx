@@ -1,28 +1,8 @@
 import React from "react"
-import { send } from 'emailjs-com';
 // animals imports
 // import AnimalList from '../../components/animals/animalList'
 
 function View({}){
-    const serviceID = 'contact_service';
-    const templateID = 'template_20rtxop';
-    const userID = 'nttu7qY7UXAEALpcI';
-
-    const sendEmail = () => {
-        const params = {
-          from_name: 'Maximo Cosseti',
-          reply_to: 'Maximo.Cosseti@yopmail.com',
-          message: 'Lore lipsim Lore lipsim Lore lipsim Lore lipsim Lore lipsim Lore lipsim ',
-        };
-        send(serviceID, templateID, params, userID)
-            .then(() => {
-            console.log('Email sent successfully!');
-            })
-            .catch((error) => {
-            console.error('Error sending email:', error);
-        });
-    };
-
     return (
         <div  className="container-fluid bg-light" style={{minHeight: '90vh',margin:'0px',padding: '0px'}}>
             <div className="row"  style={{margin:'0px',padding:'0px'}}>
@@ -55,9 +35,6 @@ function View({}){
                                     style={{maxHeight:'450px'}}
                                 />
                         </div>
-                        <div className="col-12 px-5">
-                            <button className="btn btn-danger text-white mx-1" onClick={() => sendEmail()}>MAIL</button>
-                        </div>   
                     </div>
                 </div>
             </div>

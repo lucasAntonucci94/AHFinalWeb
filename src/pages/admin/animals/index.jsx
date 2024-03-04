@@ -51,6 +51,7 @@ function Index({}){
   }
   
   function upsertAnimal(animal){
+    debugger
     if(animal === null || animal === undefined ||animal.name === null || animal.name === undefined ||animal.age === null || animal.age === undefined ||animal.description === null || animal.description === undefined ||animal.race === null || animal.race === undefined ||animal.specie === null || animal.specie === undefined || animal.name === '' || animal.age === '' || animal.race === '' || animal.specie === '' || animal.description === ''){
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos.')
@@ -73,11 +74,10 @@ function Index({}){
               setOnChange(!onChange)
             })
       }else{
-
         AnimalService.update(animal)
         .then(response =>{
           console.log(response)
-
+          debugger
           if(response.matchedCount > 0){
             setIsValid(true)
             setMessage('Animal actualizado satisfactoriamente.')

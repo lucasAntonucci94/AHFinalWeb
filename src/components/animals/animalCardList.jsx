@@ -1,15 +1,11 @@
 import { Card } from 'react-bootstrap';
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
 
-function AnimalCardList({animals = []}){
-    // function handleDelete(ev, id){
-    //     ev.preventDefault();
-    //     AnimalService.deleteOne(id)
-    //       .then(data =>{
-    //         if(data.deletedCount > 0)
-    //             refreshGrid()
-    //       })
-    // }
+function AnimalCardList({animals = [],sendEmail}){
+    function handleClick(animal){
+        sendEmail(animal)
+    }
     
     return (
         <div className="container-fluid p-5">
@@ -27,15 +23,17 @@ function AnimalCardList({animals = []}){
                                 <ul key={i} style={{textDecoration:'none'}}>
                                     <li>Especie: {animal?.specie?.name ?? ''}</li>
                                     <li>Edad: {animal?.age ?? ''}</li>
+                                    <li>Género: {animal?.genre ?? ''}</li>
                                     {/* <li>Raza: {animal.race ?? ''}</li> */}
                                     {/* <li>Género: {animal.genre ?? ''}</li> */}
                                 </ul>
                             </Card.Text>
-                            <Link className="btn btn-warning text-white w-100" to={`/animals/${animal?._id ?? ''}`}>
+                            <Link className="btn btn-warning text-white w-100 m-1" to={`/animals/${animal?._id ?? ''}`}>
                                 <b>
                                     VER
                                 </b>
                             </Link>
+                            <button className={`btn w-100 btn-info text-white font-weight-bold  m-1`} onClick={() => handleClick(animal)} > ADOPTAR</button> 
                         </Card.Body>
                     </Card>            
                 </div>
