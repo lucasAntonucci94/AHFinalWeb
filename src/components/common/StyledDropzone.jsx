@@ -5,7 +5,7 @@ function StyledDropzone({ onDrop, preview }) {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
   const [previewImage, setPreviewImage] = useState('');
-  
+  const MAX_IMAGE_SIZE = 76650;
   const baseStyle = {
     flex: 1,
     display: "flex",
@@ -82,6 +82,14 @@ function StyledDropzone({ onDrop, preview }) {
         setTimeout(() => setError(''), 5000);
         return;
       }
+      const file = acceptedFiles[0];
+
+      if (file.size > MAX_IMAGE_SIZE) {
+        setError('El tamaño de la imagen debe ser menor a 74 KB');
+        setTimeout(() => setError(''), 5000);
+        return;
+      }
+
       handleOnDrop(acceptedFiles);
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file), // Add preview URLs

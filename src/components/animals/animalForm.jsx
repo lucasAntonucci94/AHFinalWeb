@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import StyledDropzone from '../common/StyledDropzone'
-import { Form, FormGroup, FormControl, InputGroup, Button, Alert } from "react-bootstrap";
+import { Form, FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
 
 function AnimalForm({onSubmit, animal, species, races, onClick, buttonText}){
     const [idAnimal, setIdAnimal] = useState(null)
@@ -33,13 +33,7 @@ function AnimalForm({onSubmit, animal, species, races, onClick, buttonText}){
                 { id: 2, name: "Femenino" },
             ])
     }, [])
-    useEffect(function(){
-        setArrayGenre([
-                { id: 0, name: "Seleccione un género" },
-                { id: 1, name: "Masculino" },
-                { id: 2, name: "Femenino" },
-            ])
-    }, [arrayGenres])
+
     useEffect(function(){
         setArraySpecies(species ?? [])
         setArrayRaces(races ?? [])
@@ -268,7 +262,7 @@ function AnimalForm({onSubmit, animal, species, races, onClick, buttonText}){
                         isValid={isValidAge}
                         />
                         <FormControl.Feedback type="invalid">
-                            La edad no es ccorrecta.
+                            La edad no es correcta.
                         </FormControl.Feedback>
                     </InputGroup>
                 </FormGroup>
@@ -328,10 +322,10 @@ function AnimalForm({onSubmit, animal, species, races, onClick, buttonText}){
                 </FormGroup>
                 <StyledDropzone onDrop={handleOnDrop} preview={preview} />
                 <div className="d-flex justify-content-between">
-                    <Button className="btn btn-secondary w-50" onClick={handleClick}>
+                    <Button className="btn btn-secondary w-50 mt-2 mx-1" onClick={handleClick}>
                         Volver
                     </Button>
-                    <Button className="btn btn-primary w-50" type="submit">
+                    <Button className="btn btn-primary w-50 mt-2 mx-1" type="submit">
                         {buttonText}
                     </Button>
                 </div>   

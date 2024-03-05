@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import StyledDropzone from '../common/StyledDropzone'
-import { Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
+import { Form, FormGroup, FormControl, InputGroup, Button } from "react-bootstrap";
 
 function UserForm({onSubmit,onClick, user = null, buttonText}){
 
@@ -184,8 +184,16 @@ function UserForm({onSubmit,onClick, user = null, buttonText}){
                     </InputGroup>
                 </FormGroup>
                 <StyledDropzone onDrop={handleOnDrop} preview={preview} />
-                <button className="btn btn-primary w-100 mt-3 mx-auto" type="submit">INGRESAR</button>
-                <button className="btn btn-secondary w-100 mt-3 mx-auto" onClick={handleClick}>VOLVER</button>
+                {/* <button className="btn btn-primary w-100 mt-3 mx-auto" type="submit">INGRESAR</button>
+                <button className="btn btn-secondary w-100 mt-3 mx-auto" onClick={handleClick}>VOLVER</button> */}
+                <div className="d-flex justify-content-between">
+                    <Button className="btn btn-secondary w-50 mt-2 mx-1" onClick={handleClick}>
+                        Volver
+                    </Button>
+                    <Button className="btn btn-primary w-50 mt-2 mx-1" type="submit">
+                        Aceptar
+                    </Button>
+                </div>   
             </Form>
         </div>
     )
