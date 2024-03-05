@@ -35,7 +35,7 @@ function Index(){
                         <div className="col-10">
                             <h1 className="text-center py-4">Ingrese una nueva contraseña</h1>
                         </div>
-                        <div className="col-12">
+                        <div className="col-12 d-flex justify-content-center">
                             <ResetPasswordForm onSubmit={handleSubmit} />
                         </div>
                     </div>   

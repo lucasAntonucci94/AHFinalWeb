@@ -16,7 +16,7 @@ function AnimalCardList({animals = [],sendEmail}){
                 {animals.length > 0 && animals?.map((animal, i) =>  
                 <div className="col-3  d-flex justify-content-center">
                     <Card style={{ width: '18rem', margin:'10px' }}>
-                    <Card.Img variant="top"  src={animal?.image} />
+                        <Card.Img variant="top"  src={animal?.image} />
                         <Card.Body>
                             <Card.Title className="px-2">{animal?.name ?? ''}</Card.Title>
                             <Card.Text>
@@ -28,13 +28,15 @@ function AnimalCardList({animals = [],sendEmail}){
                                     {/* <li>Género: {animal.genre ?? ''}</li> */}
                                 </ul>
                             </Card.Text>
-                            <Link className="btn btn-warning text-white w-100 m-1" to={`/animals/${animal?._id ?? ''}`}>
+                        </Card.Body>
+                        <Card.Footer>
+                            <Link className="btn btn-warning text-white w-100 mb-1" to={`/animals/${animal?._id ?? ''}`}>
                                 <b>
                                     VER
                                 </b>
                             </Link>
-                            <button className={`btn w-100 btn-info text-white font-weight-bold  m-1`} onClick={() => handleClick(animal)} > ADOPTAR</button> 
-                        </Card.Body>
+                            <button className={`btn w-100 btn-info text-white font-weight-bold`} onClick={() => handleClick(animal)} > ADOPTAR</button> 
+                        </Card.Footer>
                     </Card>            
                 </div>
                 )}

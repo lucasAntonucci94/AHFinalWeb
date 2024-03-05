@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
-import * as UserService from '../../services/userService'
-import { send } from 'emailjs-com';
-import { Link } from "react-router-dom"
+import { Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
 
 function LoginForm({onSubmit, onClick}){
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPassword, setIsValidPassword] = useState(false);
 
   useEffect(function(){
     // setEmail(user?.email)
@@ -21,45 +21,69 @@ function LoginForm({onSubmit, onClick}){
     }
     function handleEmail(ev){
       setEmail(ev.target.value)
+      setIsValidEmail(validateEmail(ev.target.value))
     }
     function handlePassword(ev){
         setPassword(ev.target.value)
+        setIsValidPassword(validatePassword(ev.target.value))
     }
     function handleClick(){
       onClick()
     }
-
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+    
+      function validatePassword(password) {
+        return password.length >= 6;
+      }
     return (
-        <form className="form border rounded p-4" style={{width: '750px', backgroundColor: 'rgba(0, 0, 0, 0.1)'}} onSubmit={handleSubmit}>
-        <div className="form-group my-2">  
-            <label className="form-label" htmlFor="email">
-                <b>
-                Email
-                    </b>    
-            </label>
-            <input className="form-control" placeholder="ingrese su email" type="email" name="email" onChange={handleEmail} value={email} />
-            {/* <p className="text-small text-danger">Verifique este campo</p> */}
-        </div>
-        <div className="form-group my-2">  
-            <label className="form-label" htmlFor="password">
-                <b>
-                    Contraseña
-                </b>   
-            </label>
-            <input className="form-control" type="password" placeholder="ingrese su contraseña" name="password" onChange={handlePassword} value={password}/>
-            {/* <p className="text-small text-danger">Verifique este campo</p> */}
-        </div>
-        <button className="btn btn-primary w-100 mt-3 mx-auto" type="submit">
-            <b>
-                INGRESAR
-            </b>
-        </button>
-        <div className="text-center pt-3">
-            <button  className={`btn btn-sm btn-primary text-white font-weight-bold mx-5`} onClick={handleClick}>
-                ¿Olvidaste tu contraseña?
-            </button>
-        </div>
-    </form>
+        <Form className="form border rounded p-5" style={{ width: "750px", backgroundColor: "rgba(0, 0, 0, 0.3)" }} onSubmit={handleSubmit}>
+          <FormGroup className={isValidEmail ? "" : "has-error"}>
+          <label className="form-label text-white" htmlFor="email">
+              <b>Email</b>
+          </label>
+          <InputGroup>
+              <FormControl
+              type="email"
+              placeholder="ingrese su email"
+              name="email"
+              onChange={handleEmail}
+              value={email}
+              isInvalid={!isValidEmail}
+              isValid={isValidEmail}
+              />
+              <FormControl.Feedback type="invalid">
+              Por favor, ingrese un email válido.
+              </FormControl.Feedback>
+          </InputGroup>
+          </FormGroup>
+          <FormGroup className={isValidPassword ? "my-2" : "my-2 has-error"}>
+          <label className="form-label text-white" htmlFor="password">
+              <b>Contraseña</b>
+          </label>
+          <InputGroup>
+              <FormControl
+              type="password"
+              placeholder="ingrese su contraseña"
+              name="password"
+              onChange={handlePassword}
+              value={password}
+              isInvalid={!isValidPassword}
+              isValid={isValidPassword}
+              />
+              <FormControl.Feedback type="invalid">
+              La contraseña debe tener al menos 8 caracteres.
+              </FormControl.Feedback>
+          </InputGroup>
+          </FormGroup>
+          <button className="btn btn-primary w-100 mt-3 mx-auto" type="submit">INGRESAR</button>
+          <div className="text-center pt-3">
+              <button  className={`btn btn-sm btn-primary text-white font-weight-bold mx-5`} onClick={handleClick}>
+                  ¿Olvidaste tu contraseña?
+              </button>
+          </div>
+      </Form>
     )
 }
 
