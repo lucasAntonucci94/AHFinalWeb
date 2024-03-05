@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import StyledDropzone from '../common/StyledDropzone'
+import { Form, FormGroup, FormControl, InputGroup } from "react-bootstrap";
 
-function UserForm({onSubmit,onClick, user, buttonText}){
+function UserForm({onSubmit,onClick, user = null, buttonText}){
 
     const [idUser, setIdUser] = useState(null)
     const [password, setPassword] = useState('')
@@ -11,6 +12,11 @@ function UserForm({onSubmit,onClick, user, buttonText}){
     const [isAdmin, setIsAdmin] = useState(null)
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
+    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [isValidFirstName, setIsValidFirstName] = useState(true);
+    const [isValidLastName, setIsValidLastName] = useState(true);
+    const [isValidPassword, setIsValidPassword] = useState(true);
+
     const roles =[
         {
             label:"Administrador",
@@ -22,7 +28,7 @@ function UserForm({onSubmit,onClick, user, buttonText}){
         }
     ]
   useEffect(function(){
-    if(user != null || user != undefined )
+    if(user._id !== null && user._id !== undefined)
     {
         setIdUser(user?._id)
         setPassword(user?.password)
@@ -32,11 +38,24 @@ function UserForm({onSubmit,onClick, user, buttonText}){
         setIsAdmin(user?.isAdmin)
         setImage(user?.image)
         setPreview(user?.image)
+        setIsValidEmail(true)
+        setIsValidFirstName(true)
+        setIsValidLastName(true)
+        setIsValidPassword(true)
+    }else{
+        setIsValidEmail(false)
+        setIsValidFirstName(false)
+        setIsValidLastName(false)
+        setIsValidPassword(false)
     }
   }, [user])
     
     function handleSubmit(ev){
         ev.preventDefault()
+        if(firstName.length < 3 || lastName.length < 3 || !validateEmail(email) || password.length < 6){
+            return   
+        }
+      
         onSubmit({
             id: idUser,
             email: email,
@@ -49,18 +68,23 @@ function UserForm({onSubmit,onClick, user, buttonText}){
     }
     function handleEmail(ev){
         setEmail(ev.target.value)
+        setIsValidEmail(validateEmail(ev.target.value))
     }
     function handlePassword(ev){
         setPassword(ev.target.value)
+        setIsValidPassword(validatePassword(ev.target.value))
     }
     function handleFirstName(ev){
         setFirstName(ev.target.value)
+        setIsValidFirstName(validateFirstName(ev.target.value))
     }
     function handleLastName(ev){
         setLastName(ev.target.value)
+        setIsValidLastName(validateLastName(ev.target.value))
     }
     function handleIsAdmin(ev){
         setIsAdmin(ev.target.value)
+        // setIsValidFirstName(validateFirstName(ev.target.value))
     }
     function handleClick(){
         onClick()
@@ -68,44 +92,101 @@ function UserForm({onSubmit,onClick, user, buttonText}){
     function handleOnDrop(base64){
         setImage(base64);
     }
-    return (
-        <div>   
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="form-group">  
-                    <label className="form-label" htmlFor="email">Email</label>
-                    <input className="form-control" type="text" name="email" onChange={handleEmail} value={email} />
-                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
-                </div>
-                <div className="form-group">  
-                    <label className="form-label" htmlFor="password">Contraseña</label>
-                    <input className="form-control" type="password" name="password" onChange={handlePassword} value={password} />
-                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
-                </div>
-                <div className="form-group">  
-                    <label className="form-label" htmlFor="firstName">Nombre</label>
-                    <input className="form-control" type="text" name="firstName" onChange={handleFirstName} value={firstName}/>
-                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
-                </div>
-                <div className="form-group">  
-                    <label className="form-label" htmlFor="lastName">Apellido</label>
-                    <input className="form-control" type="text" name="lastName" onChange={handleLastName} value={lastName}/>
-                    {/* <p className="text-small text-danger">Verifique este campo</p> */}
-                </div>
-                <div className="form-group">  
-                    <label className="form-label" htmlFor="isAdmin">Rol</label>
-                    <select className="form-control" name="isAdmin" value={isAdmin} onChange={handleIsAdmin}>
-                        <option value="0">Seleccione una rol</option>
-                        {roles.map((element,i) => (
-                            <option key={i} value={element?.option}>{element?.label}</option>
-                        ))}
-                    </select>
-                </div>
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    function validateFirstName(text) {
+        return text.length >= 3
+    }
+    function validateLastName(text) {
+        return text.length >= 3;
+    }
+    function validatePassword(password) {
+        return password.length >= 6;
+    }
+        return (
+        <div className=" d-flex justify-content-center align-items-center">   
+            <Form className="form border rounded p-5 mt-3" style={{ width: "750px"}} onSubmit={handleSubmit}>
+                <FormGroup className={isValidEmail ? "" : "has-error"}>
+                    <label className="form-label" htmlFor="email">
+                        <b>Email</b>
+                    </label>
+                <InputGroup>
+                    <FormControl
+                    type="email"
+                    placeholder="ingrese su email"
+                    name="email"
+                    onChange={handleEmail}
+                    value={email}
+                    isInvalid={!isValidEmail}
+                    isValid={isValidEmail}
+                    />
+                    <FormControl.Feedback type="invalid">
+                    Por favor, ingrese un email válido.
+                    </FormControl.Feedback>
+                </InputGroup>
+                </FormGroup>
+                <FormGroup className={isValidPassword ? "" : "has-error"}>
+                    <label className="form-label" htmlFor="password">
+                        <b>Contraseña</b>
+                    </label>
+                <InputGroup>
+                    <FormControl
+                    type="password"
+                    placeholder="ingrese su contraseña"
+                    name="password"
+                    onChange={handlePassword}
+                    value={password}
+                    isInvalid={!isValidPassword}
+                    isValid={isValidPassword}
+                    />
+                    <FormControl.Feedback type="invalid">
+                        Por favor, ingrese un contraseña válida.
+                    </FormControl.Feedback>
+                </InputGroup>
+                </FormGroup>
+                <FormGroup className={isValidFirstName ? "my-1" : "my-1 has-error"}>
+                    <label className="form-label" htmlFor="name">
+                        <b>Nombre</b>
+                    </label>
+                    <InputGroup>
+                        <FormControl
+                        type="text"
+                        placeholder="ingrese su nombre"
+                        name="name"
+                        onChange={handleFirstName}
+                        value={firstName}
+                        isInvalid={!isValidFirstName}
+                        isValid={isValidFirstName}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            El nombre debe tener al menos 3 caracteres.
+                        </FormControl.Feedback>
+                    </InputGroup>
+                </FormGroup>
+                <FormGroup className={isValidLastName ? "my-1" : "my-1 has-error"}>
+                    <label className="form-label" htmlFor="lastName">
+                        <b>Apellido</b>
+                    </label>
+                    <InputGroup>
+                    <FormControl
+                        type="text"
+                        placeholder="ingrese su apellido"
+                        name="lastName"
+                        onChange={handleLastName}
+                        value={lastName}
+                        isInvalid={!isValidLastName}
+                        isValid={isValidLastName}
+                    />
+                    <FormControl.Feedback type="invalid">
+                        El apellido debe tener al menos 3 caracteres.
+                    </FormControl.Feedback>
+                    </InputGroup>
+                </FormGroup>
                 <StyledDropzone onDrop={handleOnDrop} preview={preview} />
-                <div>
-                    <button className="btn btn-primary w-100 my-3" type="submit">{buttonText}</button>
-                    <button className="btn btn-secondary w-100 my-3" type="button" onClick={handleClick}>Cancelar</button>
-                </div>
-            </form>
+                <button className="btn btn-primary w-100 mt-3 mx-auto" type="submit">INGRESAR</button>
+                <button className="btn btn-secondary w-100 mt-3 mx-auto" onClick={handleClick}>VOLVER</button>
+            </Form>
         </div>
     )
 }

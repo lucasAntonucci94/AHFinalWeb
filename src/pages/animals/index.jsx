@@ -38,7 +38,6 @@ function Index({}){
       animal_specie: animal.specie.name,
       animal_race: animal.race.name,
     };
-    debugger
     send(serviceID, templateID, params, userID)
         .then(() => {
         alert('Email sent successfully!');

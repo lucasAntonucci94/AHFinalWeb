@@ -90,7 +90,7 @@ function Index(){
                                     </FormControl.Feedback>
                                 </InputGroup>
                                 </FormGroup>
-                                <FormGroup className={isValidPassword ? "my-2" : "my-2 has-error"}>
+                                <FormGroup className={isValidPassword ? "my-1" : "my-1 has-error"}>
                                     <label className="form-label text-white" htmlFor="password">
                                         <b>Contraseña</b>
                                     </label>
@@ -109,7 +109,7 @@ function Index(){
                                         </FormControl.Feedback>
                                     </InputGroup>
                                 </FormGroup>
-                                <FormGroup className={isPasswordMatch ? "my-2" : "my-2 has-error"}>
+                                <FormGroup className={isPasswordMatch ? "my-1" : "my-1 has-error"}>
                                     <label className="form-label text-white" htmlFor="confirmPassword">
                                         <b>Confirmar Contraseña</b>
                                     </label>

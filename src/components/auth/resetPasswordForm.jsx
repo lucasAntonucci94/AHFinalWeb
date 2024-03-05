@@ -37,7 +37,7 @@ function ResetPasswordForm({onSubmit}){
     }
     return (
         <Form className="form border rounded p-5 " style={{ width: "750px", backgroundColor: "rgba(0, 0, 0, 0.3)" }} onSubmit={handleSubmit}>
-            <FormGroup className={isValidPassword ? "my-2" : "my-2 has-error"}>
+            <FormGroup className={isValidPassword ? "my-1" : "my-1 has-error"}>
                 <label className="form-label text-white" htmlFor="password">
                     <b>Contraseña</b>
                 </label>
@@ -56,7 +56,7 @@ function ResetPasswordForm({onSubmit}){
                     </FormControl.Feedback>
                 </InputGroup>
             </FormGroup>
-            <FormGroup className={isPasswordMatch ? "my-2" : "my-2 has-error"}>
+            <FormGroup className={isPasswordMatch ? "my-1" : "my-1 has-error"}>
                 <label className="form-label text-white" htmlFor="confirmPassword">
                     <b>Confirmar Contraseña</b>
                 </label>

@@ -97,13 +97,14 @@ function ProfileForm({onSubmit,onClick, user}){
                     value={email}
                     isInvalid={!isValidEmail}
                     isValid={isValidEmail}
+                    disabled
                     />
                     <FormControl.Feedback type="invalid">
                     Por favor, ingrese un email válido.
                     </FormControl.Feedback>
                 </InputGroup>
                 </FormGroup>
-                <FormGroup className={isValidFirstName ? "my-2" : "my-2 has-error"}>
+                <FormGroup className={isValidFirstName ? "my-1" : "my-1 has-error"}>
                     <label className="form-label" htmlFor="name">
                         <b>Nombre</b>
                     </label>
@@ -122,7 +123,7 @@ function ProfileForm({onSubmit,onClick, user}){
                         </FormControl.Feedback>
                     </InputGroup>
                 </FormGroup>
-                <FormGroup className={isValidLastName ? "my-2" : "my-2 has-error"}>
+                <FormGroup className={isValidLastName ? "my-1" : "my-1 has-error"}>
                     <label className="form-label" htmlFor="lastName">
                         <b>Apellido</b>
                     </label>

@@ -51,7 +51,6 @@ function Index({}){
   }
   
   function upsertAnimal(animal){
-    debugger
     if(animal === null || animal === undefined ||animal.name === null || animal.name === undefined ||animal.age === null || animal.age === undefined ||animal.description === null || animal.description === undefined ||animal.race === null || animal.race === undefined ||animal.specie === null || animal.specie === undefined || animal.name === '' || animal.age === '' || animal.race === '' || animal.specie === '' || animal.description === ''){
       setIsValid(false)
       setMessage('Los Campos del formulario son requeridos.')
@@ -76,8 +75,6 @@ function Index({}){
       }else{
         AnimalService.update(animal)
         .then(response =>{
-          console.log(response)
-          debugger
           if(response.matchedCount > 0){
             setIsValid(true)
             setMessage('Animal actualizado satisfactoriamente.')
@@ -124,7 +121,6 @@ function Index({}){
 
     return (
       <main className="container-fluid"  style={{padding:'0px', margin:'0px', minHeight:'90vh'}}>
-        
        {message &&
         <Alert className="text-center" variant={isValid ? 'success' : 'danger'}>{message}</Alert>
         }
@@ -139,13 +135,10 @@ function Index({}){
             {onChange ?
               <AnimalList animals={animals} refreshGrid={refreshGrid} toEdit={toEdit} toDelete={toDelete} />
               :
-              <AnimalForm onSubmit={upsertAnimal} animal={thisAnimal} races={races ?? []} species={species ?? []} buttonText={'ACEPTAR'} />
+              <AnimalForm onSubmit={upsertAnimal} animal={thisAnimal} races={races ?? []} species={species ?? []} onClick={handleClick} buttonText={'ACEPTAR'} />
             }
-            <button className={`btn w-100 btn-secondary ${onChange && 'd-none' } text-white font-weight-bold`} onClick={handleClick}> VOLVER</button>
-
         </div>
         </main>
- 
     )
 }
 
