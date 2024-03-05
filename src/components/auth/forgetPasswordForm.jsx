@@ -24,7 +24,7 @@ function ForgetPasswordForm({onSubmit,onClick}){
         const user = await UserService.findByEmail(email)
         const params = {
           user_email: email,
-          user_name: user.lastName+' '+user.firstName,
+          user_name: user?.lastName+' '+user?.firstName,
           subject: 'Petición para reinicio de contraseña',
           message: 'Si querés restablecer tu contraseña, haz click en el link de abajo. Y sigue los pasos.',
           linkRedirect: `http://localhost:3000/reset-password/${email}`,

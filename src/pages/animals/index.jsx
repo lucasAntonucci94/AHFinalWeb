@@ -40,7 +40,7 @@ function Index({}){
     };
     send(serviceID, templateID, params, userID)
         .then(() => {
-        alert('Email sent successfully!');
+          alert('Email sent successfully!');
         })
         .catch((error) => {
           console.log('Error sending email:', error);
