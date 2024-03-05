@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import * as RaceService from '../../services/raceService'
 
-function RaceForm({onSubmit, species, race, buttonText}){
+function RaceForm({onSubmit, onClick, species, race, buttonText}){
     const [idRace, setIdRace] = useState(null)
     const [name, setName] = useState('')
     const [idSpecie, setIdSpecie] = useState('')
@@ -36,11 +36,13 @@ function RaceForm({onSubmit, species, race, buttonText}){
     function handleSpecie(ev){
         setIdSpecie(ev.target.value)
     }
-
+    function handleClick(){
+        onClick()
+    }
     
     return (
-        <div>   
-            <form className="form" onSubmit={handleSubmit}>
+        <div className="d-flex justify-content-center align-items-center">   
+            <form className="form" onSubmit={handleSubmit}  style={{ width: "750px" }}>
             <div className="form-group">  
                 <label className="form-label" htmlFor="">Nombre</label>
                 <input className="form-control" type="text" name="name" onChange={handleName} value={name} />
@@ -55,10 +57,10 @@ function RaceForm({onSubmit, species, race, buttonText}){
                     ))}
                 </select>
             </div>
-            <div>
-
-            <button className="btn btn-primary w-100 my-3" type="submit">{buttonText}</button>
-            </div>
+            <div className="d-flex justify-content-between">
+                <button   button className="btn btn-secondary w-50 my-3 mx-1" onClick={handleClick}>Volver</button>
+                <button className="btn btn-primary w-50 my-3 mx-1" type="submit">{buttonText}</button>
+            </div>  
             </form>
         </div>
     )

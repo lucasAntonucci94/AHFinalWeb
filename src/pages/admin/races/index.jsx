@@ -99,7 +99,11 @@ function Index({}){
       }
     })
   }
-
+  function handleClick(){
+    // setThisRace({})
+    setMessage(null)
+    setOnChange(!onChange)
+  }
   function refreshGrid(){
     RaceService.find()
     .then(data =>{
@@ -124,10 +128,8 @@ function Index({}){
             {onChange ?
               <RaceList races={races ?? []}  species={species ?? []} refreshGrid={refreshGrid} toEdit={toEdit} toDelete={toDelete} />
               :
-              <RaceForm onSubmit={upsertRace} race={formData} species={species ?? []} buttonText={'ACEPTAR'} />
+              <RaceForm onSubmit={upsertRace} race={formData} species={species ?? []} buttonText={'Aceptar'} onClick={handleClick} />
             }
-            <button className={`btn w-100 btn-secondary ${onChange && 'd-none' } text-white font-weight-bold`} onClick={handleClick}> VOLVER</button>
-
         </div>
       </main>
     )

@@ -84,7 +84,7 @@ function Index({}){
     // muestro el form
     setOnChange(!onChange)
   }
- 
+  
   //Le pasamosa esta funcion al listado de speciees, para que al seleccionar eleminar uno, nos notifique.
   function toDelete(id){
     SpecieService.deleteOne(id)
@@ -100,7 +100,13 @@ function Index({}){
       }
     })
   }
- 
+  
+  function handleClick(){
+    // setThisSpecie({})
+    setMessage(null)
+    setOnChange(!onChange)
+  }
+
   function refreshGrid(){
     SpecieService.find()
     .then(data =>{
@@ -125,9 +131,8 @@ function Index({}){
             {onChange ?
               <SpecieList species={species} refreshGrid={refreshGrid} toEdit={toEdit} toDelete={toDelete} />
               :
-              <SpecieForm onSubmit={upsertSpecie} specie={thisSpecie} races={races ?? []} species={species ?? []} buttonText={'ACEPTAR'} />
+              <SpecieForm onSubmit={upsertSpecie} specie={thisSpecie} races={races ?? []} species={species ?? []} buttonText={'Aceptar'} onClick={handleClick} />
             }
-            <button className={`btn w-100 btn-secondary ${ onChange && 'd-none' } text-white font-weight-bold`} onClick={handleClick}> VOLVER</button>
         </div>
       </main>
     )
